@@ -3,6 +3,7 @@ from datetime import timedelta
 
 import requests
 from flask import Flask, jsonify, abort
+from flask_cors import CORS
 
 
 API_URL = os.environ.get(
@@ -14,6 +15,7 @@ SESSION = requests.Session()
 
 app = Flask(__name__)
 app.config["JSONIFY_PRETTYPRINT_REGULAR"] = False
+CORS(app)
 
 
 @app.after_request
@@ -60,4 +62,3 @@ def leaderboard():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
     app.run(host="0.0.0.0", port=port, debug=os.environ.get("FLASK_DEBUG") == "1")
-
